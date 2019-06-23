@@ -15,11 +15,8 @@ class Client extends \Idno\Entities\BaseObject {
     
     public function saveDataFromInput() {
 	
-	$key = 'new';
-	
 	if (empty($this->_id)) {
 	    $new = true;
-	    $key = $this->_id;
 	} else {
 	    $new = false;
 	}

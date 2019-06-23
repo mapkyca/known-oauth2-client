@@ -13,7 +13,7 @@
             <div class="controls-group">
                 <div class="controls-config">
                     <p>
-			<?= \Idno\Core\Idno::site()->language()->_(''); ?>
+			<?= \Idno\Core\Idno::site()->language()->_('Configure your OAuth2 Apps here.'); ?>
 		    </p>
                     
                 </div>

@@ -109,6 +109,20 @@ $client = $vars['client'];
 	    <p class="config-desc"><?= \Idno\Core\Idno::site()->language()->_('Access token URL.'); ?></p>
 	</div>
     </div>
+    
+    <div class="row">
+	<div class="col-md-2">
+	    <p>
+		<label class="control-label" for="url_resource"><?= \Idno\Core\Idno::site()->language()->_('Owner Resource URL'); ?></label>
+	    </p>
+	</div>
+	<div class="col-md-4">
+	    <input type="url" class="form-control" name="url_resource" value="<?= htmlspecialchars($client->url_resource)?>" >
+	</div>
+	<div class="col-md-6">
+	    <p class="config-desc"><?= \Idno\Core\Idno::site()->language()->_('Owner resource URL.'); ?></p>
+	</div>
+    </div>
 
     <div>
 

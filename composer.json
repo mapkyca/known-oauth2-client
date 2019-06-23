@@ -1,0 +1,30 @@
+{
+    "name": "mapkyca/known-oauth-client",
+    "type": "known-plugin",
+    "description": "OAuth2 Sign-on with OAuth client",
+    "version": "1.0.0",
+    "homepage": "https://www.marcus-povey.co.uk",
+    "keywords": [
+        "known",
+        "plugin"
+    ],
+    "license": "GPL-2.0",
+    "authors": [
+        {
+            "name": "Marcus Povey",
+            "email": "marcus@marcus-povey.co.uk"
+        }
+    ],
+    "require": {
+        "php": ">=7.0",
+	"composer/installers": "~1.0",
+        "league/oauth2-client": "^2.4"
+    },
+    "extra": {
+        "installer-name": "OAuth2Client"
+    },
+    "require-dev": {
+        "mapkyca/known-language-tools": "^1.0",
+	"mapkyca/known-dev-scripts": "^1.0"
+    }
+}

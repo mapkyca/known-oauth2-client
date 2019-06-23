@@ -9,7 +9,7 @@
 </div>
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
-        <form action="<?=\Idno\Core\site()->config()->getDisplayURL()?>admin/oauth2client/" class="form-horizontal" method="post" enctype="multipart/form-data">
+        
             <div class="controls-group">
                 <div class="controls-config">
                     <p>
@@ -56,14 +56,7 @@
             </div>
             
                         
-            <div>
-
-                <div class="controls-save">
-                    <button type="submit" class="btn btn-primary"><?= \Idno\Core\Idno::site()->language()->_('Save settings'); ?></button>
-                </div>
-            </div>
-
-            <?= \Idno\Core\site()->actions()->signForm('/admin/oauth2client/')?>
-        </form>
+            
+        
     </div>
 </div>

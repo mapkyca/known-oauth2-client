@@ -5,7 +5,9 @@ namespace IdnoPlugins\OAuth2Client\Entities;
 
 class Client extends \Idno\Entities\BaseObject {
     
-    
+    public function getEditURL(): string {
+	return \Idno\Core\Idno::site()->config()->getDisplayURL() . 'admin/oauth2client/' . $this->getID();
+    }
     
     public function saveDataFromInput() {
 	
@@ -22,9 +24,7 @@ class Client extends \Idno\Entities\BaseObject {
 	foreach ([
 	    'label', 'client_id', 'client_secret', 'redirect_uri', 'url_authorise', 'url_access_token',
 	] as $input) {
-	    
-	    $this->$input = \Idno\Core\Idno::site()->currentPage()->getInput("{$input}[{$key}]");
-		    
+	    $this->$input = \Idno\Core\Idno::site()->currentPage()->getInput($input);	    
 	}
 	
 	// Save button

@@ -9,6 +9,11 @@ $client = $vars['client'];
     
     <?php if ($client) { ?>
     <input type="hidden" class="form-control" required name="id" value="<?= $client->_id?>" >
+    
+    <div class="button">
+	<?= $client->draw() ?>
+    </div>
+    
     <?php } ?>
     
     <div class="row">

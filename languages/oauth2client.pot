@@ -1,0 +1,96 @@
+#: ./Pages/Authorise.php:15
+msgid "Could not find client"
+msgstr ""
+
+#: ./Pages/Authorise.php:44
+msgid "Invalid state"
+msgstr ""
+
+#: ./Pages/Admin.php:15
+msgid "OAuth2 Client Config"
+msgstr ""
+
+#: ./Pages/Admin.php:29
+msgid "Your OAuth 2 client settings were saved."
+msgstr ""
+
+#: ./templates/default/admin/oauth2client/menu.tpl.php:2
+msgid "OAuth2 Client"
+msgstr ""
+
+#: ./templates/default/admin/oauth2client/form.tpl.php:17
+msgid "Client Label"
+msgstr ""
+
+#: ./templates/default/admin/oauth2client/form.tpl.php:24
+msgid "Label for OAuth 2 client"
+msgstr ""
+
+#: ./templates/default/admin/oauth2client/form.tpl.php:31
+msgid "\"Sign in with\" button"
+msgstr ""
+
+#: ./templates/default/admin/oauth2client/form.tpl.php:38
+msgid "Graphic to use for the sign in with function"
+msgstr ""
+
+#: ./templates/default/admin/oauth2client/form.tpl.php:46
+msgid "Client ID"
+msgstr ""
+
+#: ./templates/default/admin/oauth2client/form.tpl.php:53
+msgid "Public key from your OAuth server"
+msgstr ""
+
+#: ./templates/default/admin/oauth2client/form.tpl.php:60
+msgid "Secret key"
+msgstr ""
+
+#: ./templates/default/admin/oauth2client/form.tpl.php:67
+msgid "Secret key from your OAuth server"
+msgstr ""
+
+#: ./templates/default/admin/oauth2client/form.tpl.php:74
+msgid "Redirect URI"
+msgstr ""
+
+#: ./templates/default/admin/oauth2client/form.tpl.php:81
+msgid "Where should we send the visitor after the OAuth2 handshake?"
+msgstr ""
+
+#: ./templates/default/admin/oauth2client/form.tpl.php:88
+msgid "Authorise URL"
+msgstr ""
+
+#: ./templates/default/admin/oauth2client/form.tpl.php:95
+msgid "Where should we send the auth request."
+msgstr ""
+
+#: ./templates/default/admin/oauth2client/form.tpl.php:102
+msgid "Access Token URL"
+msgstr ""
+
+#: ./templates/default/admin/oauth2client/form.tpl.php:109
+msgid "Access token URL."
+msgstr ""
+
+#: ./templates/default/admin/oauth2client/form.tpl.php:116
+msgid "Owner Resource URL"
+msgstr ""
+
+#: ./templates/default/admin/oauth2client/form.tpl.php:123
+msgid "Owner resource URL."
+msgstr ""
+
+#: ./templates/default/admin/oauth2client/form.tpl.php:130
+msgid "Save"
+msgstr ""
+
+#: ./templates/default/admin/oauth2client.tpl.php:16
+msgid "Configure your OAuth2 Apps here."
+msgstr ""
+
+#: ./templates/default/admin/oauth2client.tpl.php:26
+msgid "Configure client details"
+msgstr ""
+

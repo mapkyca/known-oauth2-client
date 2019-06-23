@@ -29,9 +29,9 @@
 		
 		<div class="controls-group">
 		<?php
-		if ($clients = \IdnoPlugins\OAuth2Client\Entities\Client::get()) {
+		if ($clients = \IdnoPlugins\OAuth2Client\Entities\OAuth2Client::get()) {
 		
-		    foreach (\Idno\Core\Idno::site()->config()->oauth2client as $client) {
+		    foreach ($clients as $client) {
 
 			echo $this->__(['client' => $client])->draw('admin/oauth2client/form');
 

@@ -9,7 +9,7 @@ $client = $vars['client'];
     
     <?php if ($client) { ?>
     <input type="hidden" class="form-control" required name="id" value="<?= $client->_id?>" >
-    
+    <?php print_r($client); ?>
     <div class="button">
 	<?= $client->draw() ?>
     </div>
@@ -37,7 +37,7 @@ $client = $vars['client'];
 	    </p>
 	</div>
 	<div class="col-md-4">
-	    <input type="text" class="form-control" name="signin_button">
+	    <input type="file" class="form-control" name="signin_button">
 	</div>
 	<div class="col-md-6">
 	    <p class="config-desc"><?= \Idno\Core\Idno::site()->language()->_('Graphic to use for the sign in with function'); ?></p>

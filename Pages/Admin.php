@@ -21,10 +21,10 @@ class Admin extends \Idno\Common\Page {
 	if (!empty($this->arguments[0])) {
 	    $object = \Idno\Common\Entity::getByID($this->arguments[0]);    
 	} else {
-	    $object = new \IdnoPlugins\OAuth2Client\Entities\Client();
+	    $object = new \IdnoPlugins\OAuth2Client\Entities\OAuth2Client();
 	}
 	
-	$object->save();
+	$object->saveDataFromInput();
 	
         \Idno\Core\site()->session()->addMessage(Idno::site()->language()->_('Your OAuth 2 client settings were saved.'));
 

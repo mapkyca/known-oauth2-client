@@ -5,6 +5,10 @@ namespace IdnoPlugins\OAuth2Client\Entities;
 
 class Client extends \Idno\Entities\BaseObject {
     
+    public function getURL() {
+	return \Idno\Core\Idno::site()->config()->getDisplayURL() . 'oauth2/authorise/' . $this->getID();
+    }
+    
     public function getEditURL(): string {
 	return \Idno\Core\Idno::site()->config()->getDisplayURL() . 'admin/oauth2client/' . $this->getID();
     }

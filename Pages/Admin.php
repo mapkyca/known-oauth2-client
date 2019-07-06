@@ -24,9 +24,10 @@ class Admin extends \Idno\Common\Page {
 	    $object = new \IdnoPlugins\OAuth2Client\Entities\OAuth2Client();
 	}
 	
-	$object->saveDataFromInput();
-	
-        \Idno\Core\site()->session()->addMessage(Idno::site()->language()->_('Your OAuth 2 client settings were saved.'));
+	if ($object->saveDataFromInput())
+	    \Idno\Core\site()->session()->addMessage(Idno::site()->language()->_('Your OAuth 2 client settings were saved.'));
+	else
+	    \Idno\Core\site()->session()->addErrorMessage(Idno::site()->language()->_('Your OAuth 2 client settings could not be saved.'));
 
         $this->forward(Idno::site()->config()->getDisplayURL() . 'admin/oauth2client/');
     }

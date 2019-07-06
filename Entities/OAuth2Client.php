@@ -25,7 +25,9 @@ class OAuth2Client extends \Idno\Entities\BaseObject {
 	foreach ([
 	    'label', 'client_id', 'client_secret', 'redirect_uri', 'url_authorise', 'url_access_token', 'url_resource'
 	] as $input) {
-	    $this->$input = \Idno\Core\Idno::site()->currentPage()->getInput($input);	    
+	    
+	    $this->$input = \Idno\Core\Idno::site()->currentPage()->getInput($input);	
+	    
 	}
 	
 	// Save button
@@ -45,7 +47,7 @@ class OAuth2Client extends \Idno\Entities\BaseObject {
 	    
 	}
 	
-	return true;
+	return $this->save();
     }
     
     

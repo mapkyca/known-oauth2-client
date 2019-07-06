@@ -33,7 +33,7 @@
 		
 		    foreach ($clients as $client) {
 
-			echo $this->__(['client' => $client])->draw('admin/oauth2client/form');
+			echo $this->__(['object' => $client])->draw('admin/oauth2client/form');
 
 		    }
 		    
@@ -47,7 +47,7 @@
 		<div class="well">
 		<?php
 		
-		echo $this->__(['client' => ''])->draw('admin/oauth2client/form');
+		echo $this->__(['object' => ''])->draw('admin/oauth2client/form');
 		
 		?>
 		</div>

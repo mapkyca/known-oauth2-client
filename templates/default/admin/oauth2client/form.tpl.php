@@ -1,17 +1,29 @@
 <?php
 
-$client = $vars['client'];
-
+$client = $vars['object'];
 
 ?>
 
-<form action="<?= $client ? $client->getEditUrl() : \Idno\Core\site()->config()->getDisplayURL()?>admin/oauth2client/" class="form-horizontal" method="post" enctype="multipart/form-data">
+<form action="<?= $client ? $client->getEditUrl() : \Idno\Core\site()->config()->getDisplayURL() . 'admin/oauth2client/'; ?>" class="form-horizontal" method="post" enctype="multipart/form-data">
     
     <?php if ($client) { ?>
     <input type="hidden" class="form-control" required name="id" value="<?= $client->_id?>" >
-    <?php print_r($client); ?>
-    <div class="button">
+    
+    <div class="well button" style="margin-top:20px;">
 	<?= $client->draw() ?>
+    </div>
+    
+    <div class="well details">
+	<div class="row">
+	    <div class="col-md-3">
+		<p>
+		    <label class="control-label" for="label"><?= \Idno\Core\Idno::site()->language()->_('Your Callback URL'); ?></label>
+		</p>
+	    </div>
+	    <div class="col-md-9">
+		<p><label class="control-label"><?= \Idno\Core\Idno::site()->config()->getDisplayURL(); ?>oauth2/authorise/<?= $client->_id; ?>/</label></p>
+	    </div>
+	</div>
     </div>
     
     <?php } ?>

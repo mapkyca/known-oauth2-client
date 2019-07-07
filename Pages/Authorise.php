@@ -17,7 +17,7 @@ class Authorise extends \Idno\Common\Page {
 	$provider = new \League\OAuth2\Client\Provider\GenericProvider([
 	    'clientId'                => $object->client_id,
 	    'clientSecret'            => $object->client_select,
-	    'redirectUri'             => $object->redirect_uri,
+	    'redirectUri'             => $object->getURL(), //$object->redirect_uri,
 	    'urlAuthorize'            => $object->url_authorise,
 	    'urlAccessToken'          => $object->url_access_token,
 	    'urlResourceOwnerDetails' => $object->url_resource

@@ -21,7 +21,7 @@ $client = $vars['object'];
 		</p>
 	    </div>
 	    <div class="col-md-9">
-		<p><label class="control-label"><?= \Idno\Core\Idno::site()->config()->getDisplayURL(); ?>oauth2/authorise/<?= $client->_id; ?>/</label></p>
+		<p><label class="control-label"><?= $client->getUrl(); ?>/</label></p>
 	    </div>
 	</div>
     </div>
@@ -85,7 +85,7 @@ $client = $vars['object'];
 	</div>
     </div>
 
-    <div class="row">
+    <!-- <div class="row">
 	<div class="col-md-2">
 	    <p>
 		<label class="control-label" for="redirect_uri"><?= \Idno\Core\Idno::site()->language()->_('Redirect URI'); ?></label>
@@ -97,7 +97,7 @@ $client = $vars['object'];
 	<div class="col-md-6">
 	    <p class="config-desc"><?= \Idno\Core\Idno::site()->language()->_('Where should we send the visitor after the OAuth2 handshake?'); ?></p>
 	</div>
-    </div>
+    </div> -->
 
     <div class="row">
 	<div class="col-md-2">

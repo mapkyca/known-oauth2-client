@@ -3,6 +3,7 @@
 namespace IdnoPlugins\OAuth2Client\Pages;
 
 use Idno\Core\Idno;
+use IdnoPlugins\OAuth2Client\Entities\OAuth2ClientException;
 
 class Authorise extends \Idno\Common\Page {
 
@@ -56,8 +57,18 @@ class Authorise extends \Idno\Common\Page {
 	    ];
 
 	    Idno::site()->logging()->info(var_export($details, true));
-	    Idno::site()->events()->triggerEvent('oauth2/authorised', $details);
+	    $user = Idno::site()->events()->triggerEvent('oauth2/authorised', $details);
+            
+            if ($user && $user instanceof Idno\Entities\User) {
+                
+                \Idno\Core\Idno::site()->session()->logUserOn($user);
+                
+                $this->forward($user->getUrl());
+            } else {
+                throw new OAuth2ClientException(Idno::site()->language()->_('Could not find a suitable handler for this user data.'));
+            }
 	    
+            
 	    
 	}
 	

@@ -58,14 +58,52 @@ class Authorise extends \Idno\Common\Page {
 
 	    Idno::site()->logging()->info(var_export($details, true));
 	    $user = Idno::site()->events()->triggerEvent('oauth2/authorised', $details);
-            
+	    
             if ($user && $user instanceof Idno\Entities\User) {
                 
                 \Idno\Core\Idno::site()->session()->logUserOn($user);
                 
                 $this->forward($user->getUrl());
             } else {
-                throw new OAuth2ClientException(Idno::site()->language()->_('Could not find a suitable handler for this user data.'));
+		
+		// Ok, now see if we can do a default log-in
+		$id = null;
+		$username = null;
+		$name = null;
+		if (!empty($details['owner_resource']['id'])) {
+		    $id = $details['owner_resource']['id'];
+		}
+		if (!empty($details['owner_resource']['username'])) {
+		    $name = $username = $details['owner_resource']['username'];
+		}
+		
+		if ($id || $username) {
+		
+		    $user = \Idno\Entities\User::get(['oauth2_userid' => $id]);
+		    if (!$user)
+			$user = \Idno\Entities\User::get(['oauth2_username' => $username]);
+		    
+		    if (!$user) {
+		
+			$user = new \Idno\Entities\User();
+			$user->email  = $details['owner_resource']['email'];
+			$user->handle = $username ? $username : $id;
+			$user->setPassword(sha1(rand()));
+			$user->notifications['email'] = 'all';
+			
+			$user->oauth2_userid = $id;
+			$user->oauth2_username = $username;
+			
+			if ($user->save())
+			    $this->forward($user->getURL ());
+		    }
+		    
+		    \Idno\Core\Idno::site()->session()->logUserOn($user);
+                
+		    $this->forward($user->getUrl());
+		
+		} else
+		    throw new OAuth2ClientException(Idno::site()->language()->_('Could not find a suitable handler for this user data.'));
             }
 	    
             

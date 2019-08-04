@@ -19,8 +19,7 @@ Out of the box this plugin WON'T fully log you in as whatever, you need to write
 
 This hook is passed an array containing the access token and other details for your to use to match up with a user, or create a new one.
 
-Like I said, this is rough as anything, but it's for a proof of concept, so meh!
-
+If the hook goes unanswered, the plugin will look for ```id``` or ```username``` in the return JSON.
 
 ## See
 

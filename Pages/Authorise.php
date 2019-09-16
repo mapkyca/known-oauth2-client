@@ -55,7 +55,7 @@ class Authorise extends \Idno\Common\Page {
 		'access_token' => $accessToken,
 		'owner_resource' => $provider->getResourceOwner($accessToken)
 	    ];
-
+            
 	    Idno::site()->logging()->info(var_export($details, true));
 	    $user = Idno::site()->events()->triggerEvent('oauth2/authorised', $details);
 	    
@@ -70,23 +70,27 @@ class Authorise extends \Idno\Common\Page {
 		$id = null;
 		$username = null;
 		$name = null;
-		if (!empty($details['owner_resource']['id'])) {
-		    $id = $details['owner_resource']['id'];
+		if (!empty($details['owner_resource']->toArray()['id'])) {
+		    $id = $details['owner_resource']->toArray()['id'];
 		}
-		if (!empty($details['owner_resource']['username'])) {
-		    $name = $username = $details['owner_resource']['username'];
+		if (!empty($details['owner_resource']->toArray()['username'])) {
+		    $name = $username = $details['owner_resource']->toArray()['username'];
+		}
+                if (!empty($details['owner_resource']->toArray()['name'])) {
+		    $name = $details['owner_resource']->toArray()['name'];
 		}
 		
 		if ($id || $username) {
 		
-		    $user = \Idno\Entities\User::get(['oauth2_userid' => $id]);
+		    $user = \Idno\Entities\User::get(['oauth2_userid' => $id])[0];
 		    if (!$user)
-			$user = \Idno\Entities\User::get(['oauth2_username' => $username]);
+			$user = \Idno\Entities\User::get(['oauth2_username' => $username])[0];
 		    
 		    if (!$user) {
 		
 			$user = new \Idno\Entities\User();
-			$user->email  = $details['owner_resource']['email'];
+                        $user->title = $name;
+			$user->email  = $details['owner_resource']->toArray()['email'];
 			$user->handle = $username ? $username : $id;
 			$user->setPassword(sha1(rand()));
 			$user->notifications['email'] = 'all';

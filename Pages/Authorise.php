@@ -21,7 +21,9 @@ class Authorise extends \Idno\Common\Page {
 	    'redirectUri'             => $object->getURL(), //$object->redirect_uri,
 	    'urlAuthorize'            => $object->url_authorise,
 	    'urlAccessToken'          => $object->url_access_token,
-	    'urlResourceOwnerDetails' => $object->url_resource
+	    'urlResourceOwnerDetails' => $object->url_resource,
+            'scopes'                  => $object->scopes,
+            'scopesSeparator'         => ','
 	]);
 
 	if (!$this->getInput('code')) {

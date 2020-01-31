@@ -140,6 +140,20 @@ $client = $vars['object'];
 	    <p class="config-desc"><?= \Idno\Core\Idno::site()->language()->_('Owner resource URL.'); ?></p>
 	</div>
     </div>
+    
+    <div class="row">
+	<div class="col-md-2">
+	    <p>
+		<label class="control-label" for="url_resource"><?= \Idno\Core\Idno::site()->language()->_('Scopes (comma separated)'); ?></label>
+	    </p>
+	</div>
+	<div class="col-md-4">
+	    <input type="url" class="form-control" name="scopes" value="<?= htmlspecialchars($client->scopes)?>" >
+	</div>
+	<div class="col-md-6">
+	    <p class="config-desc"><?= \Idno\Core\Idno::site()->language()->_('Scopes (comma separated)'); ?></p>
+	</div>
+    </div>
 
     <div>
 

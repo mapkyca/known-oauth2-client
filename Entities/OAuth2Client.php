@@ -23,7 +23,7 @@ class OAuth2Client extends \Idno\Entities\BaseObject {
 	
 	// Save variables
 	foreach ([
-	    'label', 'client_id', 'client_secret', 'redirect_uri', 'url_authorise', 'url_access_token', 'url_resource'
+	    'label', 'client_id', 'client_secret', 'redirect_uri', 'url_authorise', 'url_access_token', 'url_resource, scopes'
 	] as $input) {
 	    
 	    $this->$input = \Idno\Core\Idno::site()->currentPage()->getInput($input);	

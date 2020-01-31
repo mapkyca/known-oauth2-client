@@ -148,7 +148,7 @@ $client = $vars['object'];
 	    </p>
 	</div>
 	<div class="col-md-4">
-	    <input type="url" class="form-control" name="scopes" value="<?= htmlspecialchars($client->scopes)?>" >
+	    <input type="text" class="form-control" name="scopes" value="<?= htmlspecialchars($client->scopes)?>" >
 	</div>
 	<div class="col-md-6">
 	    <p class="config-desc"><?= \Idno\Core\Idno::site()->language()->_('Scopes (comma separated)'); ?></p>

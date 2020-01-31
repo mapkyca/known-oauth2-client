@@ -11,6 +11,12 @@ This is very early days and was really written to implement an MVP proof of conc
 * Put it in your IdnoPlugins directory as OAuth2Client
 * Activate in your plugins 
 
+Or
+
+From your known install:
+
+```composer require mapkyca/known-oauth2-client```
+
 ## Usage
 
 Go to the admin page and create your new buttons by filling in the appropriate details.

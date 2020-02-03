@@ -2,7 +2,7 @@
     "name": "mapkyca/known-oauth-client",
     "type": "known-plugin",
     "description": "OAuth2 Sign-on with OAuth client",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "homepage": "https://www.marcus-povey.co.uk",
     "keywords": [
         "known",

@@ -144,14 +144,14 @@ $client = $vars['object'];
     <div class="row">
 	<div class="col-md-2">
 	    <p>
-		<label class="control-label" for="scopes"><?= \Idno\Core\Idno::site()->language()->_('Scopes (comma separated)'); ?></label>
+		<label class="control-label" for="scopes"><?= \Idno\Core\Idno::site()->language()->_('Scopes (space separated)'); ?></label>
 	    </p>
 	</div>
 	<div class="col-md-4">
 	    <input type="text" class="form-control" name="scopes" value="<?= htmlspecialchars($client->scopes)?>" >
 	</div>
 	<div class="col-md-6">
-	    <p class="config-desc"><?= \Idno\Core\Idno::site()->language()->_('Scopes (comma separated)'); ?></p>
+	    <p class="config-desc"><?= \Idno\Core\Idno::site()->language()->_('Scopes (space separated)'); ?></p>
 	</div>
     </div>
 

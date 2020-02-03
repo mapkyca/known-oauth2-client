@@ -24,7 +24,7 @@ class Authorise extends \Idno\Common\Page {
             'urlAccessToken' => $object->url_access_token,
             'urlResourceOwnerDetails' => $object->url_resource,
             'scopes' => $object->scopes,
-            'scopesSeparator' => ','
+            'scopesSeparator' => ' '
         ]);
 
         if (!$this->getInput('code')) {

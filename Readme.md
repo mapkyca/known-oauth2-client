@@ -15,7 +15,7 @@ Or
 
 From your known install:
 
-```composer require mapkyca/known-oauth2-client```
+```composer require mapkyca/known-oauth-client```
 
 ## Usage
 

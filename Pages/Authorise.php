@@ -63,31 +63,66 @@ class Authorise extends \Idno\Common\Page {
                 
             } else {
                 
-                // Ok, now see if we can do a default log-in
                 $id = null;
                 $username = null;
                 $name = null;
-                if (!empty($details['owner_resource']->toArray()['id'])) {
+                $email = null;
+                
+                // Ok, lets see if we have an OIDC token
+                $values = $accessToken->getValues();
+                if (!empty($values['id_token'])) {
+                    
+                    $jwt = $values['id_token'];
+                    list($header, $payload, $signature) = explode(".", $jwt);
+
+                    $plainHeader = base64_decode($header);
+                    $jsonHeader = json_decode($plainHeader, true);
+                    $plainPayload = base64_decode($payload);
+                    $jsonPayload = json_decode($payload, true);
+                    
+                    if (!empty($jsonPayload['preferred_username'])) {
+                        $name = $username = $jsonPayload['preferred_username'];
+                    }
+                    
+                    if (!empty($jsonPayload['email'])) {
+                        $email = $jsonPayload['email'];
+                    }
+                    
+                    if (!empty($jsonPayload['name'])) {
+                        $name = $jsonPayload['name'];
+                    }
+                    
+                    if (!empty($jsonPayload['sub'])) {
+                        $id = $jsonPayload['sub'];
+                    }
+                }
+                
+                // Ok, now see if we can do a default log-in   
+                if (empty($id) && !empty($details['owner_resource']->toArray()['id'])) {
                     $id = $details['owner_resource']->toArray()['id'];
                 }
-                if (!empty($details['owner_resource']->toArray()['username'])) {
+                if (empty($username) && !empty($details['owner_resource']->toArray()['username'])) {
                     $name = $username = $details['owner_resource']->toArray()['username'];
                 }
-                if (!empty($details['owner_resource']->toArray()['name'])) {
+                if (empty($name) && !empty($details['owner_resource']->toArray()['name'])) {
                     $name = $details['owner_resource']->toArray()['name'];
+                }
+                if (empty($email) && !empty($details['owner_resource']->toArray()['email'])) {
+                    $email = $details['owner_resource']->toArray()['email'];
                 }
 
                 if ($id || $username) {
 
-                    $user = \Idno\Entities\User::get(['oauth2_userid' => $id])[0];
-                    if (!$user)
-                        $user = \Idno\Entities\User::get(['oauth2_username' => $username])[0];
+                    $user = \Idno\Entities\User::get(['oauth2_userid' => $object->client_id . '_' . $id])[0];
+                    if (!$user) {
+                        $user = \Idno\Entities\User::get(['oauth2_username' => $object->client_id . '_' . $username])[0];
+                    }
 
                     if (!$user) {
 
                         $user = new \Idno\Entities\User();
                         $user->title = $name;
-                        $user->email = $details['owner_resource']->toArray()['email'];
+                        $user->email = $email;
                         $user->handle = $username ? $username : $id;
                         $user->setPassword(sha1(rand()));
                         $user->notifications['email'] = 'all';

@@ -2,7 +2,7 @@
     "name": "mapkyca/known-oauth-client",
     "type": "known-plugin",
     "description": "OAuth2 Sign-on with OAuth client",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "homepage": "https://www.marcus-povey.co.uk",
     "keywords": [
         "known",
@@ -18,7 +18,8 @@
     "require": {
         "php": ">=7.0",
         "composer/installers": "~1.0",
-        "league/oauth2-client": "^2.4"
+        "league/oauth2-client": "^2.4",
+        "firebase/php-jwt": "^5.2"
     },
     "extra": {
         "installer-name": "OAuth2Client"

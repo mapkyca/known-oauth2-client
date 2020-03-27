@@ -78,7 +78,7 @@ class Authorise extends \Idno\Common\Page {
                     $plainHeader = base64_decode($header);
                     $jsonHeader = json_decode($plainHeader, true);
                     $plainPayload = base64_decode($payload);
-                    $jsonPayload = json_decode($payload, true);
+                    $jsonPayload = json_decode($plainPayload, true);
                     
                     if (!empty($jsonPayload['preferred_username'])) {
                         $name = $username = $jsonPayload['preferred_username'];

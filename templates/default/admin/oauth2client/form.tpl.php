@@ -151,7 +151,21 @@ $client = $vars['object'];
 	    <input type="text" class="form-control" name="scopes" value="<?= htmlspecialchars($client->scopes)?>" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" >
 	</div>
 	<div class="col-md-6">
-	    <p class="config-desc"><?= \Idno\Core\Idno::site()->language()->_('Scopes (space separated)'); ?></p>
+	    <p class="config-desc"><?= \Idno\Core\Idno::site()->language()->_('Scopes (space separated), e.g. openid profile email'); ?></p>
+	</div>
+    </div>
+    
+    <div class="row">
+	<div class="col-md-2">
+	    <p>
+		<label class="control-label" for="scopes"><?= \Idno\Core\Idno::site()->language()->_('Public Key location'); ?></label>
+	    </p>
+	</div>
+	<div class="col-md-4">
+	    <input type="url" class="form-control" name="publickey_url" value="<?= htmlspecialchars($client->publickey_url)?>" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" >
+	</div>
+	<div class="col-md-6">
+	    <p class="config-desc"><?= \Idno\Core\Idno::site()->language()->_('If using OpenID Connect, the url of the public key'); ?></p>
 	</div>
     </div>
 

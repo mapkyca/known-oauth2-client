@@ -3,6 +3,8 @@
 
 namespace IdnoPlugins\OAuth2Client\Entities;
 
+use Idno\Core\Idno;
+
 class OAuth2Client extends \Idno\Entities\BaseObject {
     
     public function getURL() {
@@ -23,12 +25,23 @@ class OAuth2Client extends \Idno\Entities\BaseObject {
 	
 	// Save variables
 	foreach ([
-	    'label', 'client_id', 'client_secret', 'redirect_uri', 'url_authorise', 'url_access_token', 'url_resource', 'scopes'
+	    'label', 'client_id', 'client_secret', 'redirect_uri', 'url_authorise', 'url_access_token', 'url_resource', 'scopes', 'publickey_url'
 	] as $input) {
 	    
 	    $this->$input = \Idno\Core\Idno::site()->currentPage()->getInput($input);	
 	    
 	}
+        
+        if (!empty($this->publickey_url)) {
+            
+            $publickey = \Idno\Core\Webservice::file_get_contents($this->publickey_url);
+            
+            if (empty($publickey)) {
+                throw new \RuntimeException(Idno::site()->language()->_('Public key could not be retrieved from %s', [$this->publickey_url]));
+            }
+            
+            $this->publickey = $publickey;
+        }
 	
 	// Save button
 	if ($file = \Idno\Core\Input::getFiles('signin_button')) {

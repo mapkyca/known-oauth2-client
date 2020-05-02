@@ -71,6 +71,22 @@ msgid "Owner resource URL."
 msgstr ""
 
 #: ./templates/default/admin/oauth2client/form.tpl.php:147
+msgid "Scopes (space separated)"
+msgstr ""
+
+#: ./templates/default/admin/oauth2client/form.tpl.php:154
+msgid "Scopes (space separated), e.g. openid profile email"
+msgstr ""
+
+#: ./templates/default/admin/oauth2client/form.tpl.php:161
+msgid "Public Key location"
+msgstr ""
+
+#: ./templates/default/admin/oauth2client/form.tpl.php:168
+msgid "If using OpenID Connect, the url of the public key"
+msgstr ""
+
+#: ./templates/default/admin/oauth2client/form.tpl.php:175
 msgid "Save"
 msgstr ""
 
@@ -86,23 +102,27 @@ msgstr ""
 msgid "OAuth2 Client Config"
 msgstr ""
 
-#: ./Pages/Admin.php:28
+#: ./Pages/Admin.php:29
 msgid "Your OAuth 2 client settings were saved."
 msgstr ""
 
-#: ./Pages/Admin.php:30
+#: ./Pages/Admin.php:31
 msgid "Your OAuth 2 client settings could not be saved."
 msgstr ""
 
-#: ./Pages/Authorise.php:16
+#: ./Pages/Authorise.php:19
 msgid "Could not find client"
 msgstr ""
 
-#: ./Pages/Authorise.php:45
-msgid "Invalid state"
+#: ./Pages/Authorise.php:79
+msgid "Could not validate OIDC token, as the public key is missing"
 msgstr ""
 
-#: ./Pages/Authorise.php:68
+#: ./Pages/Authorise.php:151
 msgid "Could not find a suitable handler for this user data."
+msgstr ""
+
+#: ./Entities/OAuth2Client.php:40
+msgid "Public key could not be retrieved from %s"
 msgstr ""
 

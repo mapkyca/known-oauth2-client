@@ -5,6 +5,8 @@ namespace IdnoPlugins\OAuth2Client\Pages;
 use Idno\Core\Idno;
 use IdnoPlugins\OAuth2Client\Entities\OAuth2ClientException;
 
+use Firebase\JWT\JWT;
+
 class Authorise extends \Idno\Common\Page {
 
     function getContent() {
@@ -72,29 +74,37 @@ class Authorise extends \Idno\Common\Page {
                 $values = $accessToken->getValues();
                 if (!empty($values['id_token'])) {
                     
+                    // Check we have a public key
+                    if (empty($object->publickey)) {
+                        throw new OAuth2ClientException(Idno::site()->language()->_('Could not validate OIDC token, as the public key is missing'));
+                    }
+                    
                     $jwt = $values['id_token'];
                     list($header, $payload, $signature) = explode(".", $jwt);
-
+                    
                     $plainHeader = base64_decode($header);
                     $jsonHeader = json_decode($plainHeader, true);
-                    $plainPayload = base64_decode($payload);
-                    $jsonPayload = json_decode($plainPayload, true);
                     
-                    if (!empty($jsonPayload['preferred_username'])) {
-                        $name = $username = $jsonPayload['preferred_username'];
+                    $algo = ['RS256', $header['alg']];
+                
+                    $jsonPayload = JWT::decode($jwt, $object->publickey, array_unique($algo));
+                    
+                    if (!empty($jsonPayload->preferred_username)) {
+                        $name = $username = $jsonPayload->preferred_username;
                     }
                     
-                    if (!empty($jsonPayload['email'])) {
-                        $email = $jsonPayload['email'];
+                    if (!empty($jsonPayload->email)) {
+                        $email = $jsonPayload->email;
                     }
                     
-                    if (!empty($jsonPayload['name'])) {
-                        $name = $jsonPayload['name'];
+                    if (!empty($jsonPayload->name)) {
+                        $name = $jsonPayload->name;
                     }
                     
-                    if (!empty($jsonPayload['sub'])) {
-                        $id = $jsonPayload['sub'];
+                    if (!empty($jsonPayload->sub)) {
+                        $id = $jsonPayload->sub;
                     }
+                    
                 }
                 
                 // Ok, now see if we can do a default log-in   

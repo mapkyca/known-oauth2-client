@@ -37,7 +37,7 @@ class OAuth2Client extends \Idno\Entities\BaseObject {
             $publickey = \Idno\Core\Webservice::file_get_contents($this->publickey_url);
             
             if (empty($publickey)) {
-                throw new \RuntimeException(Idno::site()->language()->_('Public key could not be retrieved from %s', [$this->publickey_url]));
+                \Idno\Core\site()->session()->addErrorMessage(Idno::site()->language()->_('Public key could not be retrieved from %s', [$this->publickey_url]));
             }
             
             $this->publickey = $publickey;

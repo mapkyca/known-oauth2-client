@@ -130,6 +130,15 @@ class Authorise extends \Idno\Common\Page {
 
                     if (!$user) {
 
+                        // Remove duplicate usernames
+                        if (!empty($username)) {
+                            $u = $username;
+                            while (\Idno\Entities\User::getByHandle($u . $n)) {
+                                $n++;
+                            }
+                            $username = $u . $n;
+                        }
+                        
                         $user = new \Idno\Entities\User();
                         $user->title = $name;
                         $user->email = $email;

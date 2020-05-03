@@ -4,17 +4,6 @@ namespace IdnoPlugins\OAuth2Client;
 
 class Main extends \Idno\Common\Plugin {
     
-    function init() {
-	
-	// Use autoload, if it's not centrally loaded.
-	if (file_exists(dirname(__FILE__) . '/vendor/autoload.php'))
-	{
-	    require_once(dirname(__FILE__) . '/vendor/autoload.php');
-	}
-	
-	parent::init();
-    }
-    
     function registerPages()
     {
 	// Register admin settings

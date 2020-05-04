@@ -4,7 +4,7 @@ namespace IdnoPlugins\OAuth2Client\Pages;
 
 use Idno\Core\Idno;
 use IdnoPlugins\OAuth2Client\Entities\OAuth2ClientException;
-
+use Idno\Core\Webservice;
 use Firebase\JWT\JWT;
 
 class Authorise extends \Idno\Common\Page {
@@ -82,7 +82,7 @@ class Authorise extends \Idno\Common\Page {
                     $jwt = $values['id_token'];
                     list($header, $payload, $signature) = explode(".", $jwt);
                     
-                    $plainHeader = base64_decode($header);
+                    $plainHeader = Webservice::base64UrlDecode($header);
                     $jsonHeader = json_decode($plainHeader, true);
                     
                     $algo = ['RS256', $header['alg']];

@@ -95,7 +95,7 @@ class Authorise extends \Idno\Common\Page {
                     }
                     
                     // Verify audience
-                    if ($jsonPayload->aud != $object->key) {
+                    if ($jsonPayload->aud != $object->client_id) {
                         throw new OAuth2ClientException(Idno::site()->language()->_('The provided OIDC token is not associated with the given client'));
                     }
                     

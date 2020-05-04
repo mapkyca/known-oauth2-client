@@ -69,6 +69,7 @@ class Authorise extends \Idno\Common\Page {
                 $username = null;
                 $name = null;
                 $email = null;
+                $picture = null;
                 
                 // Ok, lets see if we have an OIDC token
                 $values = $accessToken->getValues();
@@ -106,6 +107,10 @@ class Authorise extends \Idno\Common\Page {
                         $email = $jsonPayload->email;
                     }
                     
+                    if (!empty($jsonPayload->picture)) {
+                        $picture = $jsonPayload->picture;
+                    }
+                    
                     if (!empty($jsonPayload->name)) {
                         $name = $jsonPayload->name;
                     }
@@ -128,6 +133,9 @@ class Authorise extends \Idno\Common\Page {
                 }
                 if (empty($email) && !empty($details['owner_resource']->toArray()['email'])) {
                     $email = $details['owner_resource']->toArray()['email'];
+                }
+                if (empty($email) && !empty($details['owner_resource']->toArray()['picture'])) {
+                    $picture = $details['owner_resource']->toArray()['picture'];
                 }
 
                 if ($id || $username) {
@@ -154,6 +162,7 @@ class Authorise extends \Idno\Common\Page {
                         $user->handle = $username ? $username : $id;
                         $user->setPassword(sha1(rand()));
                         $user->notifications['email'] = 'all';
+                        if (!empty($picture)) $user->image = $picture;
 
                         $user->oauth2_userid = $id;
                         $user->oauth2_username = $username;

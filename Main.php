@@ -60,7 +60,7 @@ class Main extends \Idno\Common\Plugin {
 
             // Validate bearer if it's a JWT/OIDC
             if (OIDCToken::isJWT($access_token)) {
-
+                
                 // Preliminary decode - peek at the OIDC, to see if we can find the client
                 $unsafejwt = OIDCToken::decodeNoVerify($access_token);
 
@@ -82,11 +82,11 @@ class Main extends \Idno\Common\Plugin {
                                 $id = $safejwt->sub;
 
                                 // Try a local user
-                                $user = \Idno\Entities\User::getOne(['oauth2_userid' => $unsafejwt->aud . '_' . $id]);
+                                $user = \Idno\Entities\User::getOne(['oauth2_userid' => $safejwt->aud . '_' . $id]);
 
                                 // Try a remote user
                                 if (empty($user)) {
-                                    $user = \Idno\Entities\RemoteUser::getOne(['oauth2_userid' => $unsafejwt->aud . '_' . $id]);
+                                    $user = \Idno\Entities\RemoteUser::getOne(['oauth2_userid' => $safejwt->aud . '_' . $id]);
                                 }
 
                                 // Nothing, create this new remote user
@@ -100,7 +100,7 @@ class Main extends \Idno\Common\Plugin {
                                     if (!empty($safejwt->profile)) $user->url = $safejwt->profile;
                                     if (!empty($safejwt->picture)) $user->image = $safejwt->picture ?? '';
 
-                                    $user->oauth2_userid = $id;
+                                    $user->oauth2_userid = $safejwt->aud . '_' . $id;
                                     
                                     if (!$user->save()) {
                                         throw new OAuth2ClientException(Idno::site()->language()->_('New user account could not be saved'));
@@ -113,16 +113,16 @@ class Main extends \Idno\Common\Plugin {
                                     return $user;
                                 }
 
-                            }
+                            } 
 
 
-                        }
+                        } 
 
-                    }
+                    } 
 
-                }
+                } 
 
-            }
+            } 
         }
     }
 }

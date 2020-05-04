@@ -148,7 +148,7 @@ class Authorise extends \Idno\Common\Page {
                             $username = $u . $n;
                         }
                         
-                        $user = new \Idno\Entities\User();
+                        $user = new \Idno\Entities\RemoteUser();
                         $user->title = $name;
                         $user->email = $email;
                         $user->handle = $username ? $username : $id;

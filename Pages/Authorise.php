@@ -167,8 +167,10 @@ class Authorise extends \Idno\Common\Page {
                         $user->oauth2_userid = $id;
                         $user->oauth2_username = $username;
 
-                        if ($user->save())
-                            $this->forward($user->getURL());
+                        if (!$user->save()) {
+                            throw new OAuth2ClientException(Idno::site()->language()->_('New user account could not be saved'));
+                        }
+                            
                     }
 
                     \Idno\Core\Idno::site()->session()->logUserOn($user);

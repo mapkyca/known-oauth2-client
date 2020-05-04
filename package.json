@@ -1,6 +1,6 @@
 {
     "name": "OAuth2Client",
-    "version": "1.0.12",
+    "version": "1.0.13",
     "description": "OAuth2 Sign-on with OAuth client",
     "devDependencies": {
         "grunt": "^1.0.3"

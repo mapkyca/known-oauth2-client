@@ -89,6 +89,15 @@ class Authorise extends \Idno\Common\Page {
                 
                     $jsonPayload = JWT::decode($jwt, $object->publickey, array_unique($algo));
                     
+                    if (empty($jsonPayload)) {
+                        throw new OAuth2ClientException(Idno::site()->language()->_('There was a problem decoding the token'));
+                    }
+                    
+                    // Verify audience
+                    if ($jsonPayload->aud != $object->key) {
+                        throw new OAuth2ClientException(Idno::site()->language()->_('The provided OIDC token is not associated with the given client'));
+                    }
+                    
                     if (!empty($jsonPayload->preferred_username)) {
                         $name = $username = $jsonPayload->preferred_username;
                     }

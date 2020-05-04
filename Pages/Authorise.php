@@ -114,6 +114,9 @@ class Authorise extends \Idno\Common\Page {
                     if (!empty($jsonPayload->name)) {
                         $name = $jsonPayload->name;
                     }
+                    if (empty($name) && !empty($jsonPayload->given_name)) {
+                        $name = trim("{$jsonPayload->given_name} {$jsonPayload->middle_name} {$jsonPayload->family_name}"); 
+                    }
                     
                     if (!empty($jsonPayload->sub)) {
                         $id = $jsonPayload->sub;

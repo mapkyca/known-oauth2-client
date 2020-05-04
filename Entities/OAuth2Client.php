@@ -15,6 +15,53 @@ class OAuth2Client extends \Idno\Entities\BaseObject {
 	return \Idno\Core\Idno::site()->config()->getDisplayURL() . 'admin/oauth2client/' . $this->getID();
     }
     
+    /**
+     * Attempt a number of different ways to retrieve a public key from a url
+     * @param string $url
+     * @return string|null
+     */
+    public function getPublicKeyFromURL(string $url) : ? string {
+        
+        $publickey = \Idno\Core\Webservice::file_get_contents($url);
+        
+        if (!empty($publickey)) {
+            
+            // Json key?
+            $json = json_decode($publickey, true);
+            if (!empty($json)) {
+            
+                // Try a bunch of variations
+                foreach([
+                    'public_key',
+                    'publickey',
+                    'pk',
+                    'pub_key',
+                    'pubkey'
+                ] as $arraykey) {
+                    
+                    if (!empty($json[$arraykey])) {
+                        $publickey = $json[$arraykey];
+                    }
+                }
+            } 
+            
+            // In correct format?
+            if (strpos($publickey, 'BEGIN PUBLIC KEY') === false) {
+                $pubkey = "-----BEGIN PUBLIC KEY-----\n";
+                $pubkey .= $publickey;
+                $pubkey .= "\n-----END PUBLIC KEY-----";
+                
+                $publickey = $pubkey;
+            }
+            
+            return $publickey;
+            
+        }
+        
+        
+        return null;
+    }
+    
     public function saveDataFromInput() {
 	
 	if (empty($this->_id)) {
@@ -34,7 +81,7 @@ class OAuth2Client extends \Idno\Entities\BaseObject {
         
         if (!empty($this->publickey_url)) {
             
-            $publickey = \Idno\Core\Webservice::file_get_contents($this->publickey_url);
+            $publickey = $this->getPublicKeyFromURL($this->publickey_url);
             
             if (empty($publickey)) {
                 \Idno\Core\site()->session()->addErrorMessage(Idno::site()->language()->_('Public key could not be retrieved from %s', [$this->publickey_url]));

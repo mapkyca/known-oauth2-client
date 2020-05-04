@@ -168,6 +168,24 @@ $client = $vars['object'];
 	    <p class="config-desc"><?= \Idno\Core\Idno::site()->language()->_('If using OpenID Connect, the url of the public key'); ?></p>
 	</div>
     </div>
+    
+    <div class="row">
+	<div class="col-md-2">
+	    <p>
+		<label class="control-label" for="federation"><?= \Idno\Core\Idno::site()->language()->_('Federate with this server using OpenID Connect'); ?></label>
+	    </p>
+	</div>
+	<div class="col-md-4">
+            <input type="checkbox" data-toggle="toggle" data-onstyle="info"
+                data-on="<?php echo \Idno\Core\Idno::site()->language()->_('Yes'); ?>"
+                data-off="<?php echo \Idno\Core\Idno::site()->language()->_('No'); ?>"
+                value="true" id="federation"
+                name="federation" <?php if ($client->federation) echo 'checked'; ?>>
+        </div>
+	<div class="col-md-6">
+	    <p class="config-desc"><?= \Idno\Core\Idno::site()->language()->_('If checked, users on this server will be able to make authenticated API requests to this site. Leave off unless you know what you\'re doing!'); ?></p>
+	</div>
+    </div>
 
     <div>
 

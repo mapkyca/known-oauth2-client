@@ -3,6 +3,8 @@
 namespace IdnoPlugins\OAuth2Client;
 
 use IdnoPlugins\OAuth2\OIDCToken; // Naughty, but I'll decouple later
+use Idno\Core\Idno;
+use IdnoPlugins\OAuth2Client\Entities\OAuth2ClientException;
 
 class Main extends \Idno\Common\Plugin {
     
@@ -99,6 +101,10 @@ class Main extends \Idno\Common\Plugin {
                                     if (!empty($safejwt->picture)) $user->image = $safejwt->picture ?? '';
 
                                     $user->oauth2_userid = $id;
+                                    
+                                    if (!$user->save()) {
+                                        throw new OAuth2ClientException(Idno::site()->language()->_('New user account could not be saved'));
+                                    }
                                 }
 
                                 if (!empty($user)) {

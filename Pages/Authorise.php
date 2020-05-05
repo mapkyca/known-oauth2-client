@@ -143,15 +143,18 @@ class Authorise extends \Idno\Common\Page {
 
                 if ($id || $username) {
 
-                    // If this is a previously federated user, we need to upgrade them
-                    if ($remoteuser = \Idno\Entities\User::getOne(['oauth2_userid' => $object->client_id . '_' . $id])) {
-                        // TODO: We need to mutate them rather than simply delete, otherwise history will be lost
+                    // If this is a previously federated user, we need to upgrade them to full fat
+                    if ($remoteuser = \Idno\Entities\RemoteUser::getOne(['oauth2_userid' => $object->client_id . '_' . $id])) {
                         
+                        // We need to mutate them rather than simply delete, otherwise history will be lost
+                        $user = $remoteuser->mutate(\Idno\Entities\User::class);
                         
-                        
-                        
+                        // Make sure we have an unusable password
+                        $user->setPassword(sha1(rand()));
                     }
-                    $user = \Idno\Entities\User::getOne(['oauth2_userid' => $object->client_id . '_' . $id]);
+                    if (!$user) {
+                        $user = \Idno\Entities\User::getOne(['oauth2_userid' => $object->client_id . '_' . $id]);
+                    }
                     if (!$user) {
                         $user = \Idno\Entities\User::getOne(['oauth2_username' => $object->client_id . '_' . $username]);
                     }

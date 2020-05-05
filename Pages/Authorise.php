@@ -143,9 +143,17 @@ class Authorise extends \Idno\Common\Page {
 
                 if ($id || $username) {
 
-                    $user = \Idno\Entities\User::get(['oauth2_userid' => $object->client_id . '_' . $id])[0];
+                    // If this is a previously federated user, we need to upgrade them
+                    if ($remoteuser = \Idno\Entities\User::getOne(['oauth2_userid' => $object->client_id . '_' . $id])) {
+                        // TODO: We need to mutate them rather than simply delete, otherwise history will be lost
+                        
+                        
+                        
+                        
+                    }
+                    $user = \Idno\Entities\User::getOne(['oauth2_userid' => $object->client_id . '_' . $id]);
                     if (!$user) {
-                        $user = \Idno\Entities\User::get(['oauth2_username' => $object->client_id . '_' . $username])[0];
+                        $user = \Idno\Entities\User::getOne(['oauth2_username' => $object->client_id . '_' . $username]);
                     }
 
                     if (!$user) {

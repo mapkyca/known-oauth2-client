@@ -8,7 +8,7 @@ use Idno\Core\Idno;
 class OAuth2Client extends \Idno\Entities\BaseObject {
     
     public function getURL() {
-	return \Idno\Core\Idno::site()->config()->getDisplayURL() . 'oauth2/authorise/' . $this->getID();
+	return \Idno\Core\Idno::site()->config()->getDisplayURL() . 'oauth2/authorise/' . $this->getID() . '/';
     }
     
     public function getEditURL(): string {

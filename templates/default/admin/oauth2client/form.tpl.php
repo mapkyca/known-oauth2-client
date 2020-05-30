@@ -21,7 +21,7 @@ $client = $vars['object'];
 		</p>
 	    </div>
 	    <div class="col-md-9">
-		<p><label class="control-label"><?= $client->getUrl(); ?>/</label></p>
+		<p><label class="control-label"><?= $client->getUrl(); ?></label></p>
 	    </div>
 	</div>
     </div>

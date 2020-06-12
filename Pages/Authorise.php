@@ -8,6 +8,9 @@ use Idno\Core\Webservice;
 use Firebase\JWT\JWT;
 
 class Authorise extends \Idno\Common\Page {
+    
+    // JWT Token leeway
+    private $leeway = 10;
 
     function getContent() {
 
@@ -88,6 +91,7 @@ class Authorise extends \Idno\Common\Page {
                     
                     $algo = ['RS256', $header['alg']];
                 
+                    JWT::$leeway = $this->leeway;
                     $jsonPayload = JWT::decode($jwt, $object->publickey, array_unique($algo));
                     
                     if (empty($jsonPayload)) {

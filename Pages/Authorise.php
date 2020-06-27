@@ -178,7 +178,7 @@ class Authorise extends \Idno\Common\Page {
                         $user->title = $name;
                         $user->email = $email;
                         $user->handle = $username ? $username : $id;
-                        $user->setPassword(sha1(rand()));
+                        //$user->setPassword(sha1(rand()));
                         $user->notifications['email'] = 'all';
                         if (!empty($picture)) $user->image = $picture;
 

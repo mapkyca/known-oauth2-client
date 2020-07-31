@@ -61,7 +61,7 @@ class Authorise extends \Idno\Common\Page {
             Idno::site()->logging()->info(var_export($details, true));
             $user = Idno::site()->events()->triggerEvent('oauth2/authorised', $details);
 
-            if ($user && $user instanceof Idno\Entities\User) {
+            if ($user) {
 
                 \Idno\Core\Idno::site()->session()->logUserOn($user);
 

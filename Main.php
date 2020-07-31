@@ -98,8 +98,9 @@ class Main extends \Idno\Common\Plugin {
                 throw new OAuth2ClientException(Idno::site()->language()->_('New user account could not be saved'));
             }
 
-            return $user;
         }
+        
+        return $user;
     }
 
     /**

@@ -42,6 +42,65 @@ class Main extends \Idno\Common\Plugin {
 
         }, 1);
     }
+    
+    /**
+     * Create or fetch a user
+     * @param type $object
+     * @param string $id
+     * @param string $username
+     * @param string $name
+     * @param string $email
+     * @param string $picture
+     * @return \Idno\Entities\User
+     * @throws OAuth2ClientException
+     */
+    public static function getUser($object, string $id = null, string $username = '', string $name = '', string $email = '', string $picture = '') {
+        
+        // If this is a previously federated user, we need to upgrade them to full fat
+        if ($remoteuser = \Idno\Entities\RemoteUser::getOne(['oauth2_userid' => $object->client_id . '_' . $id])) {
+
+            // We need to mutate them rather than simply delete, otherwise history will be lost
+            $user = $remoteuser->mutate(\Idno\Entities\User::class);
+
+            // Make sure we have an unusable password
+            $user->setPassword(sha1(rand()));
+        }
+        if (!$user) {
+            $user = \Idno\Entities\User::getOne(['oauth2_userid' => $object->client_id . '_' . $id]);
+        }
+        if (!$user) {
+            $user = \Idno\Entities\User::getOne(['oauth2_username' => $object->client_id . '_' . $username]);
+        }
+
+        if (!$user) {
+
+            // Remove duplicate usernames
+            if (!empty($username)) {
+                $u = $username;
+                while (\Idno\Entities\User::getByHandle($u . $n)) {
+                    $n++;
+                }
+                $username = $u . $n;
+            }
+
+            $user = new \Idno\Entities\User();
+            $user->title = $name;
+            $user->email = $email;
+            $user->handle = $username ? $username : $id;
+            //$user->setPassword(sha1(rand()));
+            $user->notifications['email'] = 'all';
+            if (!empty($picture)) $user->image = $picture;
+
+            $user->oauth2_userid = $id;
+            $user->oauth2_username = $username;
+
+            if (!$user->save()) {
+                throw new OAuth2ClientException(Idno::site()->language()->_('New user account could not be saved'));
+            }
+
+            return $user;
+        }
+    }
 
     /**
      * Support federation via OIDC

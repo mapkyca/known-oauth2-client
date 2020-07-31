@@ -91,8 +91,8 @@ class Main extends \Idno\Common\Plugin {
             $user->notifications['email'] = 'all';
             if (!empty($picture)) $user->image = $picture;
 
-            $user->oauth2_userid = $id;
-            $user->oauth2_username = $username;
+            $user->oauth2_userid = $object->client_id . '_' . $id;
+            $user->oauth2_username = $object->client_id . '_' . $username;
 
             if (!$user->save()) {
                 throw new OAuth2ClientException(Idno::site()->language()->_('New user account could not be saved'));

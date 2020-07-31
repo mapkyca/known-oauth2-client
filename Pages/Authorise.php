@@ -53,6 +53,7 @@ class Authorise extends \Idno\Common\Page {
             ]);
 
             $details = [
+                'context' => $object,
                 'access_token' => $accessToken,
                 'owner_resource' => $object->url_resource ? $provider->getResourceOwner($accessToken) : null
             ];

@@ -134,7 +134,7 @@ $client = $vars['object'];
 	    </p>
 	</div>
 	<div class="col-md-4">
-	    <input type="url" class="form-control" name="url_resource" value="<?= htmlspecialchars($client->url_resource)?>" required >
+	    <input type="url" class="form-control" name="url_resource" value="<?= htmlspecialchars($client->url_resource)?>">
 	</div>
 	<div class="col-md-6">
 	    <p class="config-desc"><?= \Idno\Core\Idno::site()->language()->_('Owner resource URL.'); ?></p>

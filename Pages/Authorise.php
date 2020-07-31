@@ -27,7 +27,7 @@ class Authorise extends \Idno\Common\Page {
             'redirectUri' => $object->getURL(), //$object->redirect_uri,
             'urlAuthorize' => $object->url_authorise,
             'urlAccessToken' => $object->url_access_token,
-            'urlResourceOwnerDetails' => $object->url_resource,
+            'urlResourceOwnerDetails' => $object->url_resource??null,
             'scopes' => $object->scopes,
             'scopesSeparator' => ' '
         ]);
@@ -54,7 +54,7 @@ class Authorise extends \Idno\Common\Page {
 
             $details = [
                 'access_token' => $accessToken,
-                'owner_resource' => $provider->getResourceOwner($accessToken)
+                'owner_resource' => $object->url_resource ? $provider->getResourceOwner($accessToken) : null
             ];
 
             Idno::site()->logging()->info(var_export($details, true));

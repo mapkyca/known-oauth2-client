@@ -18,7 +18,7 @@ class BearerAuthenticationTest extends \Tests\KnownTestCase {
         $user->save();
             
         $application = \IdnoPlugins\OAuth2\Application::newApplication('test application');
-        $application->save();
+        $application->save(true);
         
         $token = new \IdnoPlugins\OAuth2\Token();
         $token->setOwner($user);
@@ -34,7 +34,7 @@ class BearerAuthenticationTest extends \Tests\KnownTestCase {
         $client->federation = true;
         $client->client_id = $application->key;
         $client->publickey = $application->getPublicKey();
-        $client->save();
+        $client->save(true);
         
         return [
             'Test OIDC' => [

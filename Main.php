@@ -162,7 +162,7 @@ class Main extends \Idno\Common\Plugin {
 
                                     $user->oauth2_userid = $safejwt->aud . '_' . $id;
                                     
-                                    if (!$user->save()) {
+                                    if (!$user->save(true)) {
                                         throw new OAuth2ClientException(Idno::site()->language()->_('New user account could not be saved'));
                                     }
                                 }
